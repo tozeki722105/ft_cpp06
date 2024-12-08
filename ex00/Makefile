@@ -3,7 +3,8 @@ CXXFLAGS	:=	-Wall -Wextra -Werror -Wconversion -std=c++98
 RM		:=	rm -f
 
 TARGET	:=	a.out
-SRCS    :=	main.cpp
+SRCS    :=	ScalarConverter.cpp \
+			main.cpp
 OBJS    :=	$(patsubst %.cpp, %.o, $(SRCS))
 
 .PHONY: all clean flean re
