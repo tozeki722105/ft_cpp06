@@ -14,13 +14,12 @@ void tryConvert(const std::string &str)
 
 int main()
 {
-	// validケース
 	// char
 	tryConvert("a");
 	// int
 	tryConvert("99");
 	tryConvert("-2147483648");
-	tryConvert("-2147483649");
+	tryConvert("-2147483649");  // overflow
 	// floating point
 	tryConvert("0.0f");
 	tryConvert("-4.2f");
@@ -29,5 +28,6 @@ int main()
 	tryConvert("nanf");
 	tryConvert("+inf");
 	tryConvert("42.0f");
-	tryConvert("gaganl");
+	// invalid
+	tryConvert("1.23.4");
 }
