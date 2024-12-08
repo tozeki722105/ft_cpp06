@@ -9,8 +9,8 @@ public:
 	static void convert(const std::string &str);
 
 private:
-	ScalarConverter();
-	~ScalarConverter();
+	ScalarConverter() {};
+	~ScalarConverter() {};
 
 	typedef enum e_type {
 		ERROR = 1,

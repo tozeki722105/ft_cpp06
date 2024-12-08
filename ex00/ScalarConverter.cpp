@@ -3,10 +3,6 @@
 #include <iostream>
 #include <sstream>
 
-ScalarConverter::ScalarConverter() {}
-
-ScalarConverter::~ScalarConverter() {}
-
 void ScalarConverter::putPrintable(int c)
 {
 	if (std::isprint(c))
