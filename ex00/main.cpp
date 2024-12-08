@@ -6,10 +6,10 @@ void tryConvert(const std::string &str)
 {
 	try {
 		ScalarConverter::convert(str);
+		std::cout << "\n";
 	} catch (const std::exception &e) {
 		std::cerr << e.what() << "\n";
 	}
-	std::cout << "\n";
 }
 
 int main()
