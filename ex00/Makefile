@@ -3,7 +3,7 @@ CXXFLAGS	:=	-Wall -Wextra -Werror -Wconversion -std=c++98
 RM		:=	rm -f
 
 TARGET	:=	a.out
-SRCS    :=	con.cpp 
+SRCS    :=	main.cpp
 OBJS    :=	$(patsubst %.cpp, %.o, $(SRCS))
 
 .PHONY: all clean flean re
