@@ -1,7 +1,9 @@
 #include "Serializer.hpp"
 
-uintptr_t Serializer::serialize(Data* ptr)
+uintptr_t Serializer::serialize(const Data* ptr)
 {
+	if (!ptr)
+		throw std::runtime_error("serialize: Invalid arg");
 	return reinterpret_cast<uintptr_t>(ptr);
 }
 

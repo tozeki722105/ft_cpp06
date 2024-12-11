@@ -6,7 +6,7 @@
 class Serializer
 {
 public:
-	static uintptr_t serialize(Data* ptr);
+	static uintptr_t serialize(const Data* ptr);
 	static Data* deserialize(uintptr_t raw);
 
 private:
