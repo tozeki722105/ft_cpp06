@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 
-void ScalarConverter::putPrintable(int c)
+void ScalarConverter::putCharPrintable(int c)
 {
 	if (std::isprint(c))
 		std::cout << "char: '" << static_cast<char>(c) << "'\n";
@@ -15,7 +15,7 @@ void ScalarConverter::typePutfChar(const std::string &str)
 {
 	char val = str[0];
 
-	putPrintable(val);
+	putCharPrintable(val);
 	std::cout << "int: " << static_cast<int>(val) << "\n";
 	std::cout << "float: " << static_cast<float>(val) << ".0f\n";
 	std::cout << "double: " << static_cast<double>(val) << ".0\n";
@@ -26,9 +26,9 @@ void ScalarConverter::typePutInt(const std::string &str)
 	std::istringstream iss(str);
 	int val;
 	if (!(iss >> val))
-		throw std::invalid_argument("Type overflow: Int");
+		throw std::invalid_argument("Conversion failed: Int");
 
-	putPrintable(val);
+	putCharPrintable(val);
 	std::cout << "int: " << val << "\n";
 	std::cout << "float: " << static_cast<float>(val) << ".0f\n";
 	std::cout << "double: " << static_cast<double>(val) << ".0\n";
@@ -41,7 +41,7 @@ void ScalarConverter::typePutFloatingPoint(T val, const std::string &str)
 		std::cout << "char: impossible\n";
 		std::cout << "int: impossible\n";
 	} else {
-		putPrintable(static_cast<int>(val));
+		putCharPrintable(static_cast<int>(val));
 		std::cout << "int: " << static_cast<int>(val) << "\n";
 	}
 	if (val == static_cast<T>(static_cast<int>(val))) {
@@ -52,14 +52,13 @@ void ScalarConverter::typePutFloatingPoint(T val, const std::string &str)
 		std::cout << "double: " << static_cast<double>(val) << "\n";
 	}
 }
-
 void ScalarConverter::typePutFloat(const std::string &str)
 {
 	const_cast<std::string &>(str).resize(str.length() - 1);
 	std::istringstream iss(str);
 	float val;
 	if (!(iss >> val))
-		throw std::invalid_argument("Type overflow: Float");
+		throw std::invalid_argument("Conversion failed: Float");
 
 	typePutFloatingPoint(val, str);
 }
@@ -69,7 +68,7 @@ void ScalarConverter::typePutDouble(const std::string &str)
 	std::istringstream iss(str);
 	double val;
 	if (!(iss >> val))
-		throw std::invalid_argument("Type overflow: Double");
+		throw std::invalid_argument("Conversion failed: Double");
 
 	typePutFloatingPoint(val, str);
 }
@@ -81,7 +80,7 @@ ScalarConverter::t_type ScalarConverter::getNumericType(const std::string &str)
 	size_t i = 0;
 	if (str[0] == '+' || str[0] == '-')
 		i++;
-	if (str[i] == '.')  // 富豪を除いた先頭が(.)
+	if (str[i] == '.')  // 符号を除いた先頭が(.)
 		return ERROR;
 
 	for (; i + 1 < str.length(); i++) {

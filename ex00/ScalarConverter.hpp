@@ -20,7 +20,7 @@ private:
 		DOUBLE = 5,
 	} t_type;
 
-	static void putPrintable(int c);
+	static void putCharPrintable(int c);
 	static void typePutfChar(const std::string &str);
 	static void typePutInt(const std::string &str);
 	template <typename T>
