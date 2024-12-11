@@ -82,7 +82,7 @@ void ScalarConverter::typePutDouble(const std::string &str)
 }
 
 /// @param str must not empty
-ScalarConverter::t_type ScalarConverter::getNumericType(const std::string &str)
+ScalarConverter::e_type ScalarConverter::getNumericType(const std::string &str)
 {
 	bool point_flag = false;
 	size_t i = 0;
@@ -106,7 +106,7 @@ ScalarConverter::t_type ScalarConverter::getNumericType(const std::string &str)
 	return ERROR;
 }
 
-ScalarConverter::t_type ScalarConverter::getType(const std::string &str)
+ScalarConverter::e_type ScalarConverter::getType(const std::string &str)
 {
 	if (str.empty())
 		return ERROR;
