@@ -23,8 +23,6 @@ private:
 	static void putCharPrintable(int c);
 	static void typePutfChar(const std::string &str);
 	static void typePutInt(const std::string &str);
-	template <typename T>
-	static void typePutFloatingPoint(T val, const std::string &str);
 	static void typePutFloat(const std::string &str);
 	static void typePutDouble(const std::string &str);
 	static t_type getNumericType(const std::string &str);

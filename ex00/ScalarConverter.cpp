@@ -34,24 +34,6 @@ void ScalarConverter::typePutInt(const std::string &str)
 	std::cout << "double: " << static_cast<double>(val) << ".0\n";
 }
 
-template <typename T>
-void ScalarConverter::typePutFloatingPoint(T val, const std::string &str)
-{
-	if (str == "nan" || str == "+inf" || str == "-inf") {
-		std::cout << "char: impossible\n";
-		std::cout << "int: impossible\n";
-	} else {
-		putCharPrintable(static_cast<int>(val));
-		std::cout << "int: " << static_cast<int>(val) << "\n";
-	}
-	if (val == static_cast<T>(static_cast<int>(val))) {
-		std::cout << "float: " << static_cast<float>(val) << ".0f\n";
-		std::cout << "double: " << static_cast<double>(val) << ".0\n";
-	} else {
-		std::cout << "float: " << static_cast<float>(val) << "f\n";
-		std::cout << "double: " << static_cast<double>(val) << "\n";
-	}
-}
 void ScalarConverter::typePutFloat(const std::string &str)
 {
 	const_cast<std::string &>(str).resize(str.length() - 1);
@@ -60,7 +42,20 @@ void ScalarConverter::typePutFloat(const std::string &str)
 	if (!(iss >> val))
 		throw std::invalid_argument("Conversion failed: Float");
 
-	typePutFloatingPoint(val, str);
+	if (str == "nan" || str == "+inf" || str == "-inf") {
+		std::cout << "char: impossible\n";
+		std::cout << "int: impossible\n";
+	} else {
+		putCharPrintable(static_cast<int>(val));
+		std::cout << "int: " << static_cast<int>(val) << "\n";
+	}
+	if (val == static_cast<float>(static_cast<int>(val))) {
+		std::cout << "float: " << static_cast<float>(val) << ".0f\n";
+		std::cout << "double: " << static_cast<double>(val) << ".0\n";
+	} else {
+		std::cout << "float: " << static_cast<float>(val) << "f\n";
+		std::cout << "double: " << static_cast<double>(val) << "\n";
+	}
 }
 
 void ScalarConverter::typePutDouble(const std::string &str)
@@ -70,7 +65,20 @@ void ScalarConverter::typePutDouble(const std::string &str)
 	if (!(iss >> val))
 		throw std::invalid_argument("Conversion failed: Double");
 
-	typePutFloatingPoint(val, str);
+	if (str == "nan" || str == "+inf" || str == "-inf") {
+		std::cout << "char: impossible\n";
+		std::cout << "int: impossible\n";
+	} else {
+		putCharPrintable(static_cast<int>(val));
+		std::cout << "int: " << static_cast<int>(val) << "\n";
+	}
+	if (val == static_cast<double>(static_cast<int>(val))) {
+		std::cout << "float: " << static_cast<float>(val) << ".0f\n";
+		std::cout << "double: " << static_cast<double>(val) << ".0\n";
+	} else {
+		std::cout << "float: " << static_cast<float>(val) << "f\n";
+		std::cout << "double: " << static_cast<double>(val) << "\n";
+	}
 }
 
 /// @param str must not empty
