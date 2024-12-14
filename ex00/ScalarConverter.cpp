@@ -11,14 +11,23 @@ void ScalarConverter::putCharPrintable(int c)
 		std::cout << "char: Non displayable\n";
 }
 
-void ScalarConverter::typePutfChar(const std::string &str)
+bool isNanOrInf(const std::string &str)
+{
+	return str == "nan" || str == "+inf" || str == "-inf";
+}
+
+void ScalarConverter::typePutChar(const std::string &str)
 {
 	char val = str[0];
 
-	putCharPrintable(val);
+	// char
+	putCharPrintable(static_cast<int>(val));
+	// int
 	std::cout << "int: " << static_cast<int>(val) << "\n";
-	std::cout << "float: " << static_cast<float>(val) << ".0f\n";
-	std::cout << "double: " << static_cast<double>(val) << ".0\n";
+	// float
+	std::cout << "float: " << val << ".0f\n";
+	// double
+	std::cout << "double: " << val << ".0f\n";
 }
 
 void ScalarConverter::typePutInt(const std::string &str)
@@ -28,10 +37,20 @@ void ScalarConverter::typePutInt(const std::string &str)
 	if (!(iss >> val))
 		throw std::invalid_argument("Conversion failed: Int");
 
-	putCharPrintable(val);
-	std::cout << "int: " << val << "\n";
-	std::cout << "float: " << static_cast<float>(val) << ".0f\n";
-	std::cout << "double: " << static_cast<double>(val) << ".0\n";
+	// char
+	if (isOverFlow<int, char>(val))
+		std::cout << "char: impossible\n";
+	else
+		putCharPrintable(static_cast<int>(val));
+	// int
+	std::cout << "int: " << static_cast<int>(val) << "\n";
+	// float
+	if (isOverFlow<int, float>(val))
+		std::cout << "float: impossible\n";
+	else
+		std::cout << "float: " << val << ".0f\n";
+	// double
+	std::cout << "double: " << val << ".0f\n";
 }
 
 void ScalarConverter::typePutFloat(const std::string &str)
@@ -42,20 +61,26 @@ void ScalarConverter::typePutFloat(const std::string &str)
 	if (!(iss >> val))
 		throw std::invalid_argument("Conversion failed: Float");
 
-	if (str == "nan" || str == "+inf" || str == "-inf") {
+	// char
+	if (isNanOrInf(str) || isOverFlow<float, char>(val) || !isInt(val))
 		std::cout << "char: impossible\n";
-		std::cout << "int: impossible\n";
-	} else {
+	else
 		putCharPrintable(static_cast<int>(val));
+	// int
+	if (isNanOrInf(str) || isOverFlow<float, int>(val) || !isInt(val))
+		std::cout << "int: impossible\n";
+	else
 		std::cout << "int: " << static_cast<int>(val) << "\n";
-	}
-	if (val == static_cast<float>(static_cast<int>(val))) {
-		std::cout << "float: " << static_cast<float>(val) << ".0f\n";
-		std::cout << "double: " << static_cast<double>(val) << ".0\n";
-	} else {
-		std::cout << "float: " << static_cast<float>(val) << "f\n";
-		std::cout << "double: " << static_cast<double>(val) << "\n";
-	}
+	// float
+	if (isInt(val))
+		std::cout << "float: " << val << ".0f\n";
+	else
+		std::cout << "float: " << val << "f\n";
+	// double
+	if (isInt(val))
+		std::cout << "double: " << val << ".0f\n";
+	else
+		std::cout << "double: " << val << "f\n";
 }
 
 void ScalarConverter::typePutDouble(const std::string &str)
@@ -65,20 +90,28 @@ void ScalarConverter::typePutDouble(const std::string &str)
 	if (!(iss >> val))
 		throw std::invalid_argument("Conversion failed: Double");
 
-	if (str == "nan" || str == "+inf" || str == "-inf") {
+	// char
+	if (isNanOrInf(str) || isOverFlow<double, char>(val) || !isInt(val))
 		std::cout << "char: impossible\n";
-		std::cout << "int: impossible\n";
-	} else {
+	else
 		putCharPrintable(static_cast<int>(val));
+	// int
+	if (isNanOrInf(str) || isOverFlow<double, int>(val) || !isInt(val))
+		std::cout << "int: impossible\n";
+	else
 		std::cout << "int: " << static_cast<int>(val) << "\n";
-	}
-	if (val == static_cast<double>(static_cast<int>(val))) {
-		std::cout << "float: " << static_cast<float>(val) << ".0f\n";
-		std::cout << "double: " << static_cast<double>(val) << ".0\n";
-	} else {
-		std::cout << "float: " << static_cast<float>(val) << "f\n";
-		std::cout << "double: " << static_cast<double>(val) << "\n";
-	}
+	// float
+	if (isOverFlow<float>(val))
+		std::cout << "float: impossible\n";
+	else if (isInt(val))
+		std::cout << "float: " << val << ".0f\n";
+	else
+		std::cout << "float: " << val << "f\n";
+	// double
+	if (isInt(val))
+		std::cout << "double: " << val << ".0f\n";
+	else
+		std::cout << "double: " << val << "f\n";
 }
 
 /// @param str must not empty
@@ -126,9 +159,11 @@ ScalarConverter::e_type ScalarConverter::getType(const std::string &str)
 
 void ScalarConverter::convert(const std::string &str)
 {
+	typePutDouble(str);
+	return;
 	switch (getType(str)) {
 		case CHAR:
-			typePutfChar(str);
+			typePutChar(str);
 			break;
 		case INT:
 			typePutInt(str);
