@@ -121,12 +121,12 @@ ScalarConverter::e_type ScalarConverter::getNumericType(const std::string &str)
 	size_t i = 0;
 	if (str[0] == '+' || str[0] == '-')
 		i++;
-	if (str[i] == '.')  // 符号を除いた先頭が(.)
-		return ERROR;
+	// if (str[i] == '.')  // 符号を除いた先頭が(.)
+	// 	return ERROR;
 
 	for (; i + 1 < str.length(); i++) {
 		// 初めての(.) && 次が数値
-		if (!point_flag && str[i] == '.' && std::isdigit(str[i + 1]))
+		if (!point_flag && str[i] == '.')  // && std::isdigit(str[i + 1])
 			point_flag = true;
 		else if (!std::isdigit(str[i]))
 			return ERROR;
@@ -154,13 +154,23 @@ ScalarConverter::e_type ScalarConverter::getType(const std::string &str)
 		return CHAR;
 
 	//  numeric type
-	return getNumericType(str);
+	std::string::size_type e_pos = str.find('e');
+	if (e_pos == std::string::npos)
+		return (getNumericType(str));
+	if (str.rfind('e') != e_pos)  // eが複数ある場合
+		return ERROR;
+	std::string mantissa = str.substr(0, e_pos);
+	bool fFlag = (str.find('f') == str.length() - 1);  // fが最後尾に存在する場合　ex)42e3f
+	std::string exponent = str.substr(e_pos + 1, str.length() - e_pos - 1 - fFlag);
+	e_type mantissaType = getNumericType(mantissa);
+	if (mantissaType == ERROR || mantissaType == FLOAT  // ex)42fe1,42fe2f
+			|| getNumericType(exponent) != INT)
+		return ERROR;
+	return fFlag ? FLOAT : DOUBLE;
 }
 
 void ScalarConverter::convert(const std::string &str)
 {
-	typePutDouble(str);
-	return;
 	switch (getType(str)) {
 		case CHAR:
 			typePutChar(str);
