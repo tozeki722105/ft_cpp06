@@ -2,6 +2,7 @@
 #define SCALARCONVERTER_HPP
 
 #include <string>
+#include <limits>
 
 class ScalarConverter
 {
@@ -29,24 +30,34 @@ private:
 	static e_type getType(const std::string &str);
 
 	template <typename ARG_T, typename VALIDATE_T>
-	static bool isOverFlow(ARG_T val)
-	{
-		return (val < std::numeric_limits<VALIDATE_T>::min() ||
-				val > std::numeric_limits<VALIDATE_T>::max());
-	}
-
+	static bool isOverFlow(ARG_T val);
 	template <typename ARG_T>
-	static bool isOverFlow(ARG_T val)
-	{
-		return (val < -std::numeric_limits<float>::max() ||
-				val > std::numeric_limits<float>::max());
-	}
-
+	static bool isOverFlow(ARG_T val);
 	template <typename T>
-	static bool isInt(T val)
-	{
-		return (val == static_cast<T>(static_cast<int>(val)));
-	}
+	static bool isInt(T val);
 };
+
+
+template <typename ARG_T, typename VALIDATE_T>
+bool ScalarConverter::isOverFlow(ARG_T val)
+{
+	return (val < std::numeric_limits<VALIDATE_T>::min() ||
+			val > std::numeric_limits<VALIDATE_T>::max());
+}
+
+template <typename ARG_T>
+bool ScalarConverter::isOverFlow(ARG_T val)
+{
+	return (val < -std::numeric_limits<float>::max() ||
+			val > std::numeric_limits<float>::max());
+}
+
+template <typename T>
+bool ScalarConverter::isInt(T val)
+{
+	return (val == static_cast<T>(static_cast<int>(val)));
+}
+
+
 
 #endif
