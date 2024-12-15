@@ -1,0 +1,141 @@
+Test Case: a
+char: 'a'
+int: 97
+float: 97.0f
+double: 97.0
+-------------------------
+Test Case: 42
+char: '*'
+int: 42
+float: 42.0f
+double: 42.0
+-------------------------
+Test Case: 42.0f
+char: '*'
+int: 42
+float: 42.0f
+double: 42.0
+-------------------------
+Test Case: 42.0
+char: '*'
+int: 42
+float: 42.0f
+double: 42.0
+-------------------------
+Test Case: 2147483647
+char: impossible
+int: 2147483647
+float: 2.14748e+09.0f
+double: 2.14748e+09.0
+-------------------------
+Test Case: -2147483648
+char: impossible
+int: -2147483648
+float: -2.14748e+09.0f
+double: -2.14748e+09.0
+-------------------------
+Test Case: 3.4028235e+38f
+char: impossible
+int: impossible
+float: 3.40282e+38f
+double: 3.40282e+38
+-------------------------
+Test Case: -3.4028235e+38f
+char: impossible
+int: impossible
+float: -3.40282e+38f
+double: -3.40282e+38
+-------------------------
+Test Case: 1.1754942e-38f
+Conversion failed: Float
+-------------------------
+Test Case: 1.7976931348623157e+308
+char: impossible
+int: impossible
+float: impossible
+double: 1.79769e+308
+-------------------------
+Test Case: -1.7976931348623157e+308
+char: impossible
+int: impossible
+float: impossible
+double: -1.79769e+308
+-------------------------
+Test Case: +inf
+char: impossible
+int: impossible
+float: +inff
+double: +inf
+-------------------------
+Test Case: -inf
+char: impossible
+int: impossible
+float: -inff
+double: -inf
+-------------------------
+Test Case: nan
+char: impossible
+int: impossible
+float: nanf
+double: nan
+-------------------------
+Test Case: +inff
+char: impossible
+int: impossible
+float: +inff
+double: +inf
+-------------------------
+Test Case: -inff
+char: impossible
+int: impossible
+float: -inff
+double: -inf
+-------------------------
+Test Case: nanf
+char: impossible
+int: impossible
+float: nanf
+double: nan
+-------------------------
+Test Case: 3.4028234e+38f
+char: impossible
+int: impossible
+float: 3.40282e+38f
+double: 3.40282e+38
+-------------------------
+Test Case: 3.4028236e+38f
+Conversion failed: Float
+-------------------------
+Test Case: 1.1754942e-38f
+Conversion failed: Float
+-------------------------
+Test Case: 1.1754941e-38f
+Conversion failed: Float
+-------------------------
+Test Case: 1.7976931348623157e+308
+char: impossible
+int: impossible
+float: impossible
+double: 1.79769e+308
+-------------------------
+Test Case: -1.7976931348623157e+308
+char: impossible
+int: impossible
+float: impossible
+double: -1.79769e+308
+-------------------------
+Test Case: 
+Non convertible string
+-------------------------
+Test Case: 123abc
+Non convertible string
+-------------------------
+Test Case: hello
+Non convertible string
+-------------------------
+Test Case: 'abc'
+Non convertible string
+-------------------------
+Test Case: +-42
+Non convertible string
+-------------------------

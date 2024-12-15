@@ -42,7 +42,7 @@ void ScalarConverter::typePutInt(const std::string &str)
 {
 	std::istringstream iss(str);
 	int val;
-	if (!(iss >> val))
+	if (!(iss >> val) || !iss.eof())
 		throw std::invalid_argument("Conversion failed: Int");
 
 	// char
@@ -69,7 +69,7 @@ void ScalarConverter::typePutFloat(const std::string &str)
 
 	std::istringstream iss(str);
 	float val;
-	if (!(iss >> val))
+	if (!(iss >> val) || !iss.eof())
 		throw std::invalid_argument("Conversion failed: Float");
 
 	// char
@@ -101,7 +101,7 @@ void ScalarConverter::typePutDouble(const std::string &str)
 
 	std::istringstream iss(str);
 	double val;
-	if (!(iss >> val))
+	if (!(iss >> val) || !iss.eof())
 		throw std::invalid_argument("Conversion failed: Double");
 
 	// char
