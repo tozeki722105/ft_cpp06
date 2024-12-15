@@ -53,10 +53,10 @@ void ScalarConverter::typePutInt(const std::string &str)
 	// int
 	std::cout << "int: " << static_cast<int>(val) << "\n";
 	// float
-	if (isOverFlow<int>(val)) //判定する方がfloat
+	if (isOverFlow<int>(val))
 		std::cout << "float: impossible\n";
 	else
-		std::cout << "float: " << static_cast<float>(val) << ".0\n";
+		std::cout << "float: " << static_cast<float>(val) << ".0f\n";
 	// double
 	std::cout << "double: " << static_cast<double>(val) << ".0\n";
 }
@@ -98,7 +98,7 @@ void ScalarConverter::typePutDouble(const std::string &str)
 {
 	if (isNanOrInf(str))
 		return putNanOrInf(str);
-	
+
 	std::istringstream iss(str);
 	double val;
 	if (!(iss >> val))
@@ -115,7 +115,7 @@ void ScalarConverter::typePutDouble(const std::string &str)
 	else
 		std::cout << "int: " << static_cast<int>(val) << "\n";
 	// float
-	if (isOverFlow<double>(val)) //判定する方がfloat
+	if (isOverFlow<double>(val))
 		std::cout << "float: impossible\n";
 	else if (isInt(val))
 		std::cout << "float: " << static_cast<float>(val) << ".0f\n";
@@ -183,8 +183,6 @@ ScalarConverter::e_type ScalarConverter::getType(const std::string &str)
 
 void ScalarConverter::convert(const std::string &str)
 {
-	typePutDouble(str);
-	return;
 	switch (getType(str)) {
 		case CHAR:
 			typePutChar(str);
