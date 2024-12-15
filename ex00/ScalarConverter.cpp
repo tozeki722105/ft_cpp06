@@ -139,8 +139,7 @@ ScalarConverter::e_type ScalarConverter::getNumericType(const std::string &str)
 	// 	return ERROR;
 
 	for (; i + 1 < str.length(); i++) {
-		// 初めての(.) && 次が数値
-		if (!point_flag && str[i] == '.')  // && std::isdigit(str[i + 1])
+		if (!point_flag && str[i] == '.')  // && std::isdigit(str[i + 1]) //次が数値
 			point_flag = true;
 		else if (!std::isdigit(str[i]))
 			return ERROR;
@@ -148,6 +147,8 @@ ScalarConverter::e_type ScalarConverter::getNumericType(const std::string &str)
 
 	if (str[i] == 'f' && point_flag)
 		return FLOAT;
+	else if (str[i] == '.')
+		return DOUBLE;
 	else if (std::isdigit(str[i]))
 		return point_flag ? DOUBLE : INT;
 	return ERROR;
