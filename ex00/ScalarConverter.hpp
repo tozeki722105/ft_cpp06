@@ -55,7 +55,7 @@ bool ScalarConverter::isOverFlow(ARG_T val)
 template <typename T>
 bool ScalarConverter::isInt(T val)
 {
-	return (val == static_cast<T>(static_cast<int>(val)));
+	return (val == static_cast<T>(static_cast<long long>(val)));
 }
 
 
